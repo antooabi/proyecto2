@@ -1,13 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap");
+
 :root {
   --fondo: hsl(320, 45%, 14%);
   --tarjeta: hsl(320, 30%, 24%);
   --tarjeta2: hsl(320, 28%, 30%);
-  --borde: hsl(320, 25%, 40%);
+  --borde: hsl(335, 70%, 65%);
   --blanco: hsl(0, 0%, 100%);
   --gris: hsl(320, 20%, 82%);
   --rosa: hsl(335, 85%, 70%);
   --rosa-fuerte: hsl(330, 70%, 45%);
   --rosa-oscuro: hsl(320, 65%, 40%);
+  --sombra: hsl(335, 85%, 70%);
 }
 
 * {
@@ -17,9 +20,12 @@
 }
 
 body {
-  font-family: "DM Sans", sans-serif;
+  font-family: "Quicksand", sans-serif;
   font-size: 18px;
-  background: var(--fondo);
+  font-weight: 500;
+  background-color: var(--fondo);
+  background-image: radial-gradient(hsl(320, 35%, 22%) 2px, transparent 2px);
+  background-size: 28px 28px;
   color: var(--blanco);
   min-height: 100vh;
 }
@@ -35,8 +41,8 @@ button {
 button:focus-visible,
 input:focus-visible,
 select:focus-visible {
-  outline: 2px solid var(--blanco);
-  outline-offset: 2px;
+  outline: 3px dashed var(--blanco);
+  outline-offset: 3px;
 }
 
 .contenedor {
@@ -62,10 +68,12 @@ select:focus-visible {
   align-items: center;
   gap: 8px;
   background: var(--tarjeta);
-  padding: 12px 16px;
-  border-radius: 8px;
+  border: 2px solid var(--borde);
+  box-shadow: 4px 4px 0 var(--sombra);
+  padding: 12px 20px;
+  border-radius: 999px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .boton-oscuro:hover {
@@ -79,13 +87,14 @@ select:focus-visible {
 .menu {
   position: absolute;
   right: 0;
-  top: calc(100% + 8px);
+  top: calc(100% + 12px);
   z-index: 10;
   background: var(--tarjeta);
-  border: 1px solid var(--borde);
-  border-radius: 12px;
-  padding: 8px;
-  min-width: 220px;
+  border: 2px solid var(--borde);
+  box-shadow: 6px 6px 0 var(--sombra);
+  border-radius: 28px 8px 28px 8px;
+  padding: 12px;
+  min-width: 230px;
 }
 
 .menu[hidden] {
@@ -98,9 +107,10 @@ select:focus-visible {
   align-items: center;
   width: 100%;
   text-align: left;
-  padding: 10px 12px;
-  border-radius: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
   font-size: 16px;
+  font-weight: 600;
   margin-bottom: 2px;
 }
 
@@ -109,7 +119,7 @@ select:focus-visible {
 }
 
 .opcion.activo {
-  background: var(--tarjeta2);
+  background: var(--rosa-fuerte);
 }
 
 .opcion.activo::after {
@@ -120,19 +130,21 @@ select:focus-visible {
 }
 
 .titulo-menu {
-  color: var(--gris);
-  font-size: 14px;
-  padding: 8px 12px 4px;
+  font-family: "Fredoka", sans-serif;
+  color: var(--rosa);
+  font-size: 15px;
+  padding: 10px 14px 4px;
 }
 
 /* ----- Título y buscador ----- */
 .titulo {
-  font-family: "Bricolage Grotesque", sans-serif;
+  font-family: "Fredoka", sans-serif;
   font-weight: 700;
   font-size: 3.5rem;
   text-align: center;
   margin-bottom: 48px;
   line-height: 1.1;
+  text-shadow: 4px 4px 0 var(--rosa-oscuro);
 }
 
 .buscador {
@@ -149,8 +161,10 @@ select:focus-visible {
   flex: 1;
   max-width: 526px;
   background: var(--tarjeta);
-  border-radius: 12px;
-  padding: 0 24px;
+  border: 2px solid var(--borde);
+  box-shadow: 4px 4px 0 var(--sombra);
+  border-radius: 999px;
+  padding: 0 28px;
 }
 
 .caja-busqueda:hover {
@@ -172,20 +186,30 @@ select:focus-visible {
 
 .boton-rosa {
   background: var(--rosa-fuerte);
-  padding: 0 24px;
-  border-radius: 12px;
-  font-weight: 500;
+  border: 2px solid var(--borde);
+  box-shadow: 4px 4px 0 var(--sombra);
+  padding: 0 28px;
+  border-radius: 999px;
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
 }
 
 .boton-rosa:hover {
   background: var(--rosa-oscuro);
 }
 
+.boton-rosa:active,
+.boton-oscuro:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--sombra);
+}
+
 .mensaje {
+  font-family: "Fredoka", sans-serif;
   text-align: center;
   margin-bottom: 32px;
   color: var(--gris);
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .mensaje[hidden] {
@@ -205,21 +229,50 @@ select:focus-visible {
   align-items: center;
   gap: 16px;
   background: linear-gradient(135deg, var(--rosa), var(--rosa-oscuro));
-  border-radius: 20px;
-  padding: 24px;
+  border: 2px solid var(--blanco);
+  box-shadow: 8px 8px 0 var(--sombra);
+  border-radius: 70px 16px 70px 16px;
+  padding: 24px 40px;
   min-height: 286px;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
+}
+
+/* colores según el clima (los pone el script) */
+.hoy.soleado {
+  background: linear-gradient(135deg, hsl(25, 95%, 60%), hsl(335, 75%, 50%));
+}
+
+.hoy.lluvioso {
+  background: linear-gradient(135deg, hsl(260, 60%, 55%), hsl(320, 65%, 38%));
+}
+
+.hoy.nublado {
+  background: linear-gradient(135deg, hsl(300, 20%, 50%), hsl(320, 40%, 32%));
+}
+
+.hoy.nevado {
+  background: linear-gradient(135deg, hsl(280, 55%, 65%), hsl(335, 60%, 55%));
 }
 
 .hoy h2 {
-  font-size: 28px;
+  font-family: "Fredoka", sans-serif;
+  font-size: 30px;
   font-weight: 600;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .hoy p {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 18px;
+}
+
+.hoy .consejo {
+  display: inline-block;
+  margin-top: 16px;
+  background: hsla(0, 0%, 100%, 0.2);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 15px;
 }
 
 .hoy-temp {
@@ -233,9 +286,9 @@ select:focus-visible {
 }
 
 .hoy-temp span {
-  font-size: 6rem;
-  font-weight: 600;
-  font-style: italic;
+  font-family: "Fredoka", sans-serif;
+  font-size: 6.5rem;
+  font-weight: 700;
   line-height: 1;
 }
 
@@ -243,14 +296,25 @@ select:focus-visible {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 
 .dato {
   background: var(--tarjeta);
-  border: 1px solid var(--borde);
-  border-radius: 12px;
+  border: 2px solid var(--borde);
+  box-shadow: 4px 4px 0 var(--sombra);
+  border-radius: 30px 8px 30px 8px;
   padding: 20px;
+  transition: transform 0.15s;
+}
+
+.dato:nth-child(even) {
+  border-radius: 8px 30px 8px 30px;
+}
+
+.dato:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0 var(--sombra);
 }
 
 .dato p {
@@ -260,14 +324,17 @@ select:focus-visible {
 }
 
 .dato strong {
+  font-family: "Fredoka", sans-serif;
   font-size: 2rem;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 .subtitulo {
-  font-size: 20px;
+  font-family: "Fredoka", sans-serif;
+  font-size: 24px;
   font-weight: 600;
   margin-bottom: 20px;
+  color: var(--rosa);
 }
 
 .dias {
@@ -278,14 +345,21 @@ select:focus-visible {
 
 .dia {
   background: var(--tarjeta);
-  border: 1px solid var(--borde);
-  border-radius: 12px;
-  padding: 16px 10px;
+  border: 2px solid var(--borde);
+  box-shadow: 4px 4px 0 var(--sombra);
+  border-radius: 999px 999px 24px 24px;
+  padding: 22px 10px 16px;
   text-align: center;
   display: flex;
   flex-direction: column;
   gap: 16px;
   align-items: center;
+  font-weight: 700;
+  transition: transform 0.15s;
+}
+
+.dia:hover {
+  transform: translateY(-6px);
 }
 
 .dia img {
@@ -297,17 +371,19 @@ select:focus-visible {
   justify-content: space-between;
   width: 100%;
   font-size: 16px;
+  padding: 0 6px;
 }
 
 .dia .temps span:last-child {
   color: var(--gris);
 }
 
-/* ----- Pronóstico por horas ----- */
 .horas {
   background: var(--tarjeta);
-  border-radius: 20px;
-  padding: 24px;
+  border: 2px solid var(--borde);
+  box-shadow: 8px 8px 0 var(--sombra);
+  border-radius: 16px 70px 16px 70px;
+  padding: 28px 24px;
   align-self: start;
 }
 
@@ -319,25 +395,27 @@ select:focus-visible {
 }
 
 .horas-encabezado h3 {
-  font-size: 20px;
+  font-family: "Fredoka", sans-serif;
+  font-size: 22px;
   font-weight: 600;
 }
 
 .horas-encabezado select {
-  background: var(--tarjeta2);
+  background: var(--rosa-fuerte);
   color: var(--blanco);
-  border: none;
-  border-radius: 8px;
-  padding: 8px 12px;
+  border: 2px solid var(--borde);
+  border-radius: 999px;
+  padding: 8px 14px;
   font: inherit;
   font-size: 15px;
+  font-weight: 700;
   cursor: pointer;
 }
 
 .lista-horas {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   max-height: 620px;
   overflow-y: auto;
   padding-right: 6px;
@@ -347,10 +425,11 @@ select:focus-visible {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 16px;
+  padding: 8px 20px;
   background: var(--tarjeta2);
-  border: 1px solid var(--borde);
-  border-radius: 8px;
+  border: 2px solid var(--borde);
+  border-radius: 999px;
+  font-weight: 700;
 }
 
 .hora img {
@@ -359,6 +438,7 @@ select:focus-visible {
 
 .hora .texto-hora {
   flex: 1;
+  font-family: "Fredoka", sans-serif;
   font-size: 20px;
   font-weight: 500;
 }
@@ -373,7 +453,7 @@ select:focus-visible {
   color: var(--rosa);
 }
 
-/* ----- Responsive ----- */
+
 @media (max-width: 1000px) {
   .grid {
     grid-template-columns: 1fr;
@@ -407,6 +487,7 @@ select:focus-visible {
     flex-direction: column;
     text-align: center;
     padding: 32px 16px;
+    border-radius: 50px 12px 50px 12px;
   }
   .hoy-temp img {
     width: 90px;
@@ -420,5 +501,8 @@ select:focus-visible {
   }
   .dias {
     grid-template-columns: repeat(3, 1fr);
+  }
+  .horas {
+    border-radius: 12px 50px 12px 50px;
   }
 }

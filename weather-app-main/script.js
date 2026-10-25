@@ -25,16 +25,21 @@ const dias = document.getElementById("dias");
 const selectDia = document.getElementById("select-dia");
 const listaHoras = document.getElementById("lista-horas");
 
+const tarjetaHoy = document.querySelector(".hoy");
+const consejo = document.createElement("p");
+consejo.className = "consejo";
+tarjetaHoy.children[0].appendChild(consejo);
 
 let nombreCiudad = "Berlin, Germany";
-let latitud = 52.52;  
-let longitud = 13.41;  
+let latitud = 52.52;
+let longitud = 13.41;
+
 let unidadTemp = "celsius";
 let unidadViento = "kmh";
 let unidadLluvia = "mm";
 
-let datos = null;     
-let diaElegido = 0;   
+let datos = null;
+let diaElegido = 0;
 
 function obtenerIcono(codigo) {
   if (codigo === 0) {
@@ -62,6 +67,41 @@ function obtenerIcono(codigo) {
     return "icon-storm.webp";
   }
   return "icon-overcast.webp";
+}
+
+function obtenerClase(codigo) {
+  if (codigo <= 2) {
+    return "soleado";
+  }
+  if (codigo >= 71 && codigo <= 77) {
+    return "nevado";
+  }
+  if (codigo === 85 || codigo === 86) {
+    return "nevado";
+  }
+  if (codigo >= 51) {
+    return "lluvioso";
+  }
+  return "nublado";
+}
+
+function obtenerConsejo(codigo) {
+  if (codigo <= 2) {
+    return "Great day to go outside!";
+  }
+  if (codigo === 3 || codigo === 45 || codigo === 48) {
+    return "A bit grey today";
+  }
+  if (codigo >= 95) {
+    return "Stay inside, storm ahead!";
+  }
+  if (codigo >= 71 && codigo <= 77) {
+    return "Bundle up, it's snowing!";
+  }
+  if (codigo >= 51) {
+    return "Don't forget your umbrella!";
+  }
+  return "Have a nice day!";
 }
 
 function nombreDia(texto, formato) {
@@ -116,7 +156,6 @@ async function pedirClima() {
   }
 }
 
-
 async function buscarCiudad(nombre) {
   mensaje.hidden = false;
   mensaje.textContent = "Search in progress...";
@@ -151,7 +190,6 @@ function mostrarTodo() {
   const actual = datos.current;
   const diario = datos.daily;
 
-
   ciudad.textContent = nombreCiudad;
   const f = new Date(actual.time.slice(0, 10) + "T12:00:00");
   fecha.textContent = f.toLocaleDateString("en-US", {
@@ -162,11 +200,14 @@ function mostrarTodo() {
   });
   iconoHoy.src = "./assets/images/" + obtenerIcono(actual.weather_code);
   tempHoy.textContent = grados(actual.temperature_2m);
+
+  tarjetaHoy.className = "hoy " + obtenerClase(actual.weather_code);
+  consejo.textContent = obtenerConsejo(actual.weather_code);
+
   sensacion.textContent = grados(actual.apparent_temperature);
   humedad.textContent = Math.round(actual.relative_humidity_2m) + "%";
   viento.textContent = Math.round(actual.wind_speed_10m) + " " + datos.current_units.wind_speed_10m;
   lluvia.textContent = actual.precipitation + " " + datos.current_units.precipitation;
-
 
   let htmlDias = "";
   for (let i = 0; i < diario.time.length; i++) {
@@ -183,7 +224,6 @@ function mostrarTodo() {
   }
   dias.innerHTML = htmlDias;
 
-
   let htmlOpciones = "";
   for (let i = 0; i < diario.time.length; i++) {
     htmlOpciones += `<option value="${i}">${nombreDia(diario.time[i], "long")}</option>`;
@@ -196,10 +236,10 @@ function mostrarTodo() {
 
 function mostrarHoras() {
   const horario = datos.hourly;
-  const diaTexto = datos.daily.time[diaElegido]; 
+  const diaTexto = datos.daily.time[diaElegido];
+
   let htmlHoras = "";
   for (let i = 0; i < horario.time.length; i++) {
-
     if (horario.time[i].slice(0, 10) === diaTexto) {
       htmlHoras += `
         <div class="hora">
@@ -213,7 +253,6 @@ function mostrarHoras() {
   listaHoras.innerHTML = htmlHoras;
   listaHoras.scrollTop = 0;
 }
-
 
 function marcar(boton, activo) {
   if (activo) {
@@ -237,7 +276,6 @@ function actualizarBotones() {
     btnCambiar.textContent = "Switch to Imperial";
   }
 }
-
 
 btnUnidades.addEventListener("click", function () {
   menuUnidades.hidden = !menuUnidades.hidden;
