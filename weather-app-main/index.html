@@ -2,65 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700&family=DM+Sans:ital,wght@0,300;0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <title>Frontend Mentor | Weather app</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 0.6875rem; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
 <body>
+  <div class="contenedor">
 
-  Units
+    <header class="encabezado">
+      <img src="./assets/images/logo.svg" alt="Weather Now" class="logo">
 
-  Switch to Imperial/Metric
+      <div class="caja-menu">
+        <button id="btn-unidades" class="boton-oscuro">
+          <img src="./assets/images/icon-units.svg" alt="">
+          Units
+          <img src="./assets/images/icon-dropdown.svg" alt="">
+        </button>
 
-  Temperature
+        <div id="menu-unidades" class="menu" hidden>
+          <button id="btn-cambiar" class="opcion">Switch to Imperial</button>
 
-  Celsius (°C)
-  Fahrenheit (°F)
+          <p class="titulo-menu">Temperature</p>
+          <button id="btn-celsius" class="opcion activo">Celsius (°C)</button>
+          <button id="btn-fahrenheit" class="opcion">Fahrenheit (°F)</button>
 
-  Wind Speed
+          <p class="titulo-menu">Wind Speed</p>
+          <button id="btn-kmh" class="opcion activo">km/h</button>
+          <button id="btn-mph" class="opcion">mph</button>
 
-  km/h
-  mph
+          <p class="titulo-menu">Precipitation</p>
+          <button id="btn-mm" class="opcion activo">Millimeters (mm)</button>
+          <button id="btn-inch" class="opcion">Inches (in)</button>
+        </div>
+      </div>
+    </header>
 
-  Precipitation
+    <h1 class="titulo">How's the sky looking today?</h1>
 
-  Millimeters (mm)
-  Inches (in)
+    <form id="formulario" class="buscador">
+      <div class="caja-busqueda">
+        <img src="./assets/images/icon-search.svg" alt="">
+        <input id="busqueda" type="text" placeholder="Search for a city, e.g., New York" required>
+      </div>
+      <button type="submit" class="boton-rosa">Search</button>
+    </form>
 
-  How's the sky looking today?
+    <p id="mensaje" class="mensaje" hidden></p>
 
-  Search for a city, e.g., New York
-  Search
+    <main id="contenido" class="grid">
 
-  Feels like
-  <!-- Insert temperature here -->
+      <section>
+        <div class="hoy">
+          <div>
+            <h2 id="ciudad">-</h2>
+            <p id="fecha">-</p>
+          </div>
+          <div class="hoy-temp">
+            <img id="icono-hoy" src="./assets/images/icon-sunny.webp" alt="">
+            <span id="temp-hoy">-</span>
+          </div>
+        </div>
 
-  Humidity
-  <!-- Insert humidity here -->
+        <div class="datos">
+          <div class="dato"><p>Feels like</p><strong id="sensacion">-</strong></div>
+          <div class="dato"><p>Humidity</p><strong id="humedad">-</strong></div>
+          <div class="dato"><p>Wind</p><strong id="viento">-</strong></div>
+          <div class="dato"><p>Precipitation</p><strong id="lluvia">-</strong></div>
+        </div>
 
-  Wind
-  <!-- Insert wind here -->   
-  
-  Precipitation
-  <!-- Insert precipitation here -->
+        <h3 class="subtitulo">Daily forecast</h3>
+        <div id="dias" class="dias"></div>
+      </section>
 
-  Daily forecast
-  <!-- Insert daily forecast for the next 7 days here -->
+      <aside class="horas">
+        <div class="horas-encabezado">
+          <h3>Hourly forecast</h3>
+          <select id="select-dia"></select>
+        </div>
+        <div id="lista-horas" class="lista-horas"></div>
+      </aside>
 
-  Hourly forecast
-  <!-- Insert hourly forecast for the selected day here -->
+    </main>
+  </div>
 
   <footer class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
     Coded by <a href="#">Your Name Here</a>.
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
